@@ -12,11 +12,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Add latest tag
-        if: ${{ github.ref_name == env.MAIN_BRANCH_NAME }}
-        id: add-latest-tag
-        run: |
-          echo "IMG_TAGS=latest" >> $GITHUB_ENV
       - name: Build Image
         id: build-image
         run: docker build . --file Dockerfile.arm64 --tag test-eguz-arm64:$(date +%s)
