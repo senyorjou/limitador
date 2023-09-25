@@ -1,12 +1,18 @@
 ---
-name: Build limitador  base-system
+name: Build limitador base-system
 
 on:
   push:
     paths:
       - '.github/workflows/build-base-system-image.yaml'
+      - './docker/base-system.Dockerfile'
     branches:
       - 'create-faster-build-perhaps'
+
+env:
+  IMG_TAGS: ${{ github.sha }}
+  IMG_REGISTRY_HOST: senyorjou
+
 
 jobs:
   build:
@@ -29,3 +35,17 @@ jobs:
             ./docker/base-system.Dockerfile
           build-args: |
             GITHUB_SHA=${{ github.sha }}
+
+      - name: Push Image
+        id: push-to-registry
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: ${{ env.IMG_REGISTRY_HOST }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Print Image URL
+        run: |
+          echo "Image pushed to ${{ steps.push-to-registry.outputs.registry-paths }}"
