@@ -1,5 +1,5 @@
 ---
-name: Build limitador base-system
+name: Build limitador base-runner
 
 on:
   push:
