@@ -4,8 +4,8 @@ name: Build limitador base-system
 on:
   push:
     paths:
-      - '.github/workflows/build-base-system-image.yaml'
-      - './docker/base-system.Dockerfile'
+      - '.github/workflows/build-base-runner-image.yaml'
+      - './docker/base-runner.Dockerfile'
     branches:
       - 'create-faster-build-perhaps'
 
@@ -29,10 +29,10 @@ jobs:
         id: build-image
         uses: redhat-actions/buildah-build@v2
         with:
-          image: limitador-base-system
+          image: limitador-base-runner
           platforms: linux/amd64,linux/arm64
           dockerfiles: |
-            ./docker/base-system.Dockerfile
+            ./docker/base-runner.Dockerfile
           build-args: |
             GITHUB_SHA=${{ github.sha }}
 
