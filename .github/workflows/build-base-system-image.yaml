@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - '.github/workflows/build-base-system-image.yaml'
-      - './docker/base-system.Dockerfile'
+      - 'docker/base-system.Dockerfile'
     branches:
       - 'create-faster-build-perhaps'
 
