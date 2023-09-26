@@ -25,11 +25,11 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-    - name: Cache cargo build dependencies
-      uses: actions/cache@v3
-      with:
-        path: /usr/src/limitador/target/release/build
-        key: cargo-deps-${{ hashFiles('./limitador-server/cargo.toml') }}
+      - name: Cache cargo build dependencies
+        uses: actions/cache@v3
+        with:
+          path: /usr/src/limitador/target/release/build
+          key: cargo-deps-${{ hashFiles('./limitador-server/cargo.toml') }}
 
       - name: Build Image
         id: build-image
