@@ -20,3 +20,14 @@ RUN PKGS="gcc-c++ gcc-toolset-12-binutils-gold openssl-devel protobuf-c protobuf
     && yum -y clean all
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path --profile minimal --default-toolchain ${RUSTC_VERSION} -c rustfmt -y
+
+WORKDIR /usr/src/limitador
+
+ARG GITHUB_SHA
+ENV GITHUB_SHA=${GITHUB_SHA:-unknown}
+ENV RUSTFLAGS="-C target-feature=-crt-static"
+
+COPY . .
+
+RUN source $HOME/.cargo/env \
+    && cargo build --release
