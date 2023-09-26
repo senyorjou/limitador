@@ -19,7 +19,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     container:
-      image: ${{ env.IMG_REGISTRY_HOST }}/limitador-base-system
+      image: senyorjou/limitador-base-system
     steps:
       - name: Check out code
         uses: actions/checkout@v4
