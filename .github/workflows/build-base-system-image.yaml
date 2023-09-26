@@ -30,7 +30,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: limitador-base-system
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           dockerfiles: |
             ./docker/base-system.Dockerfile
           build-args: |
